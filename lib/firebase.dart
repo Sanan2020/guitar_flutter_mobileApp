@@ -68,7 +68,7 @@ class _firebaseState extends State<firebase> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Test Firebase..."),
+        title: Text("Test Firebase...56"),
       ),
       body: Container(
         child: Column(
