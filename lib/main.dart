@@ -15,22 +15,31 @@ import 'package:flutter_app/sign_up.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'firebase2.dart';
+
+var stateInternet;
 void main() async {
   bool result = await InternetConnectionChecker().hasConnection;
-if(result == true) {
-  print('InternetConnection...');
-} else {
-  print('No internet :( Reason:');
-  print(InternetConnectionChecker().hasListeners);
-}
+  if (result == true) {
+    print('Internet Connected');
+    stateInternet = 'Internet Connected';
+  } else {
+    stateInternet = 'No internet!';
+    print('No internet :( Reason:');
+    print(InternetConnectionChecker().hasListeners);
+  }
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyApp createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
+  //const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

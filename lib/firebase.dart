@@ -1,13 +1,18 @@
 //import 'dart:html';
-import 'dart:io';
+//import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/login.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_app/main.dart';
+//import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+
 final userRef = FirebaseFirestore.instance.collection("test");
 String name = '';
 String pass = '';
+var data = <String>[];
+var data1;
+var data2;
 var growableList = <String>["is"];
 
 class firebase extends StatefulWidget {
@@ -19,16 +24,19 @@ class firebase extends StatefulWidget {
 class _firebaseState extends State<firebase> {
   @override
   void initState() {
-    print("fb1");
-     getUsers();
+    print(">initState()");
+    getUsers();
     super.initState();
   }
 
   getUsers() {
-    print("object");
+    print(">getUsers()");
     userRef.get().then((QuerySnapshot snapshot) {
       snapshot.docs.forEach((DocumentSnapshot doc) {
         print(doc.data());
+        data.add(doc.data().toString());
+        print(data);
+        //data = doc['username'];
         // print(doc.id);
         //name = doc.data().toString();
 
@@ -43,7 +51,7 @@ class _firebaseState extends State<firebase> {
         //print(doc['username']);
         //pass = doc['password'];
         //name = doc['username'].toString();
-        print("fb2");
+        //print("fb2");
 
         // if ("sanan" == name) {
         //   print("sanan sec");
@@ -54,6 +62,8 @@ class _firebaseState extends State<firebase> {
         //   print(a.data());
         // }
       });
+      data1 = data[0].toString();
+      data2 = data[1].toString();
     });
     // if (email.toString() == name) {
     //   print("404");
@@ -68,11 +78,11 @@ class _firebaseState extends State<firebase> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Test Firebase...56"),
+        title: Text("Test Firebase..."),
       ),
       body: Container(
         child: Column(
-          children: [Text("...")],
+          children: [Text("$stateInternet"), Text("$data1"), Text("$data")],
         ),
       ),
     );
